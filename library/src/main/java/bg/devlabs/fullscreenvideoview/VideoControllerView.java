@@ -568,7 +568,11 @@ class VideoControllerView extends FrameLayout
     }
 
     private void setColorFilter(@NonNull Drawable drawable, int color) {
-        drawable.setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_ATOP));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            drawable.setColorFilter(new BlendModeColorFilter(color, BlendMode.SRC_ATOP));
+        } else {
+            drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     /**
